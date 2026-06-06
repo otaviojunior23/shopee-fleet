@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Shopee Fleet — Dashboard de acompanhamento de frota própria" />
+    <meta name="theme-color" content="#EE4D2D" />
+
+    <!-- Favicon emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>" />
+
+    <title>Shopee Fleet · LM Hub SP</title>
+
+    <!-- Fonts pré-carregadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background: #F5F5F5;
+        color: #333;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Loading splash enquanto o React carrega */
+      #splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        background: #EE4D2D;
+        z-index: 9999;
+        transition: opacity 0.4s ease;
+      }
+      #splash.hidden { opacity: 0; pointer-events: none; }
+      #splash-logo { font-size: 56px; animation: bounce 0.8s ease infinite alternate; }
+      #splash-title { color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
+      #splash-sub   { color: rgba(255,255,255,0.75); font-size: 13px; font-weight: 500; }
+      #splash-bar   { width: 180px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+      #splash-fill  { height: 100%; width: 0%; background: #fff; border-radius: 4px; animation: fill 1.2s ease forwards; }
+
+      @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+      @keyframes fill   { from { width: 0%; } to { width: 100%; } }
+    </style>
+  </head>
+
+  <body>
+    <!-- Splash screen -->
+    <div id="splash">
+      <div id="splash-logo">🛵</div>
+      <div id="splash-title">Shopee Fleet</div>
+      <div id="splash-sub">LM Hub SP · Campinas · São Martinho</div>
+      <div id="splash-bar"><div id="splash-fill"></div></div>
+    </div>
+
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!-- Entry point Vite -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Oculta splash após carregamento -->
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var s = document.getElementById('splash');
+          if (s) { s.classList.add('hidden'); setTimeout(function(){ s.remove(); }, 450); }
+        }, 1300);
+      });
+    </script>
+  </body>
+</html>
